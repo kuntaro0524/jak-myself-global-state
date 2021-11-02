@@ -1,6 +1,4 @@
 import styled from "styled-components";
-// 遷移時のstateの数値を受け取る関数
-import { useLocation } from "react-router-dom";
 import { SearchInput } from "../molecules/SearchInput";
 import { UserCard } from "../organisms/user/UserCard";
 
@@ -24,11 +22,6 @@ const users = [...Array(10).keys()].map((val) => {
 });
 
 export const Users = () => {
-  // 呼び出し側からのstateを受け取る
-  const { state } = useLocation();
-  // isAdminが設定されていたらその値を、設定されていなかったらfalseを設定する
-  const isAdmin = state ? state.isAdmin : false;
-
   return (
     <SContainer>
       <h2> ユーザ一覧 </h2>
@@ -36,7 +29,7 @@ export const Users = () => {
       <SUserArea>
         {users.map((user) => (
           // UserCardにisAdminのフラグをわたしていく
-          <UserCard key={user.id} user={user} isAdmin={isAdmin} />
+          <UserCard key={user.id} user={user} />
         ))}
       </SUserArea>
     </SContainer>

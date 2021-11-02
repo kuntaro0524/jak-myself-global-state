@@ -9,11 +9,15 @@ import { UserContext } from "../../../providers/UserProvider";
 
 export const UserIconWithName = (props) => {
   // componentの昨日としては名前とイメージを表示するだけなので受け取るpropsも限定しておいたほうがみんなにとってわかりやすい
-  const { name, image, isAdmin } = props;
+  const { name, image } = props;
   // 実際にGlobal stateの内容を受け取るところ
   // どのcontextかを指定してあげる必要がある
-  const context = useContext(UserContext);
-  console.log(context);
+  // さらに変化するパラメタとしてUserProviderに設定したuserInfo（global管理されている数値）
+  const { userInfo } = useContext(UserContext);
+  console.log(userInfo);
+
+  // 受け取った context から isAdminを取り出す
+  const isAdmin = userInfo ? userInfo.isAdmin : false;
 
   return (
     <SContainer>

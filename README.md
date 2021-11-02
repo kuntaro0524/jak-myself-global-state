@@ -39,4 +39,35 @@
 - 使うときには `import React, { useContext } from "react";`
 - `const context = useContext(UserContext);`
 - 重要なことはここでどのコンテキストを利用するのか？ということを宣言しながら useContext を呼ぶこと
+- UserContext は上述したとおり　 UserProvider の中に定義してある
 - 上記の例でいうと context に "KunioHirata" という文字列を入れている → これが参照できるようになった
+
+# 一定の数値だけではなく global state を利用する方法（Hooks と似ているような気がする）
+
+## UserProvider.jsx の中でどこからでも使える変数とセット関数を定義する
+
+-　ここまでは "KunioHirata" という文字列を context としていたが、より汎用的にしていく。
+
+- UserProvider.jsx の中でどのコンポーネントからでも値が参照、変更できるように useState を宣言する
+- const [userInfo, setUserInfo] = useState(null);
+- こうすると userInfo がグローバル変数、setUserInfo がその変数をセットする関数として定義できる
+
+## 今回のコミットでは、まず Top.jsx の中で setUserInfo を利用して初期値(isAdmin)を設定する
+
+- onClick のところで「管理者」か「一般ユーザ」かというボタンを押したときに管理者ならば isAdmin 　を true 　にする
+- setUserInfo({ isAdmin: true });
+- 今の所 TypeScript を使っていないので、 UserProvider.jsx で定義した「空のオブジェクト」に数値をここで勝手に入れる感じ
+- ここで変更したものは「バケツリレーしなくても」参照することができるので以下にその方法を記載する
+
+## 「UserIconWithName.jsx の中からその情報へアクセスする」
+
+- UserContext を参照する準備をする
+  -- import React, { useContext } from "react";
+  -- import { UserContext } from "../../../providers/UserProvider";
+- UserContext の値を受け取る方法
+  -- const { userInfo } = useContext(UserContext);
+  -- こうすると userInfo の今の中身を受け取ることができる → これに isAdmin が入っている
+  -- あとは global に userInfo が定義されているかどうかを確認してあれば値を得る。なければ false を入れるなど
+  -- const isAdmin = userInfo ? userInfo.isAdmin : false;
+
+これでバケツリレーが完全に解消されたことを確認した。
