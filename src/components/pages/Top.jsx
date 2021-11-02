@@ -6,8 +6,11 @@ export const Top = () => {
   // ボタンを押したときにページ遷移をするときに使う関数
   const history = useHistory();
 
-  const onClickAdmin = () => history.push("/users");
-  const onClickUser = () => history.push("/users");
+  // 画面遷移だけではなくて、管理者かどうかのフラグもわたしていく
+  const onClickAdmin = () =>
+    history.push({ pathname: "users", state: { isAdmin: true } });
+  const onClickUser = () =>
+    history.push({ pathname: "users", state: { isAdmin: false } });
 
   return (
     <SContainer>

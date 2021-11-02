@@ -1,4 +1,6 @@
 import styled from "styled-components";
+// 遷移時のstateの数値を受け取る関数
+import { useLocation } from "react-router-dom";
 import { SearchInput } from "../molecules/SearchInput";
 import { UserCard } from "../organisms/user/UserCard";
 
@@ -22,6 +24,10 @@ const users = [...Array(10).keys()].map((val) => {
 });
 
 export const Users = () => {
+  // 呼び出し側からのstateを受け取る
+  const { state } = useLocation();
+  console.log(state);
+
   return (
     <SContainer>
       <h2> ユーザ一覧 </h2>
