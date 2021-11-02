@@ -62,12 +62,12 @@
 ## 「UserIconWithName.jsx の中からその情報へアクセスする」
 
 - UserContext を参照する準備をする
-  -- import React, { useContext } from "react";
-  -- import { UserContext } from "../../../providers/UserProvider";
+  - import React, { useContext } from "react";
+  - import { UserContext } from "../../../providers/UserProvider";
 - UserContext の値を受け取る方法
-  -- const { userInfo } = useContext(UserContext);
-  -- こうすると userInfo の今の中身を受け取ることができる → これに isAdmin が入っている
-  -- あとは global に userInfo が定義されているかどうかを確認してあれば値を得る。なければ false を入れるなど
-  -- const isAdmin = userInfo ? userInfo.isAdmin : false;
+  - const { userInfo } = useContext(UserContext);
+  - こうすると userInfo の今の中身を受け取ることができる → これに isAdmin が入っている
+  - あとは global に userInfo が定義されているかどうかを確認してあれば値を得る。なければ false を入れるなど
+  - const isAdmin = userInfo ? userInfo.isAdmin : false;
 
 これでバケツリレーが完全に解消されたことを確認した。
