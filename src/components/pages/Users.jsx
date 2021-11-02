@@ -26,7 +26,8 @@ const users = [...Array(10).keys()].map((val) => {
 export const Users = () => {
   // 呼び出し側からのstateを受け取る
   const { state } = useLocation();
-  console.log(state);
+  // isAdminが設定されていたらその値を、設定されていなかったらfalseを設定する
+  const isAdmin = state ? state.isAdmin : false;
 
   return (
     <SContainer>
@@ -34,7 +35,8 @@ export const Users = () => {
       <SearchInput />
       <SUserArea>
         {users.map((user) => (
-          <UserCard key={user.id} user={user} />
+          // UserCardにisAdminのフラグをわたしていく
+          <UserCard key={user.id} user={user} isAdmin={isAdmin} />
         ))}
       </SUserArea>
     </SContainer>

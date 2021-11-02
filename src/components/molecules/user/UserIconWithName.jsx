@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 export const UserIconWithName = (props) => {
   // componentの昨日としては名前とイメージを表示するだけなので受け取るpropsも限定しておいたほうがみんなにとってわかりやすい
-  const { name, image } = props;
+  const { name, image, isAdmin } = props;
   return (
     <SContainer>
       <SImage alt="profile" height={160} src={image} />
       <SName> {name} </SName>
+      {isAdmin && <SEdit> 編集 </SEdit>}
     </SContainer>
   );
 };
@@ -27,4 +28,11 @@ const SImage = styled.img`
 const SName = styled.p`
   font-size: 36px;
   font-weight: bold;
+`;
+
+// 名前の表示;
+const SEdit = styled.p`
+  text-decoration: underline;
+  color: #aaa;
+  cursor: pointer;
 `;
