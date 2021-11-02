@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { SecondaryButton } from "../atoms/button/SecondaryButton";
 
 export const Top = () => {
-  const onClickAdmin = () => alert("管理者だよ");
-  const onClickUser = () => alert("ユーザだよ");
+  // ボタンを押したときにページ遷移をするときに使う関数
+  const history = useHistory();
+
+  const onClickAdmin = () => history.push("/users");
+  const onClickUser = () => history.push("/users");
+
   return (
     <SContainer>
       <h2> Top page death! </h2>
