@@ -1,9 +1,10 @@
 import { memo, useContext } from "react";
 import styled from "styled-components";
-import { UserContext } from "../../providers/UserProvider";
 import { SecondaryButton } from "../atoms/button/SecondaryButton";
 import { SearchInput } from "../molecules/SearchInput";
 import { UserCard } from "../organisms/user/UserCard";
+import { userState } from "../../store/userState";
+import { useRecoilState } from "recoil";
 
 // 10このオブジェクトを作成している（ダミー）
 // arrayを10個だしてmapで同じデータを出している
@@ -25,7 +26,11 @@ const users = [...Array(10).keys()].map((val) => {
 });
 
 export const Users = memo(() => {
-  const { userInfo, setUserInfo } = useContext(UserContext);
+  // recoilを使う側の定義。
+  // useStateと同じ感覚で良い。
+  // つまり定義している　　userState.js　には特にセット関数を入れているわけでもないけどここで定義することができる
+  // 変数と関数を同時に設定できるのが useRecoilState というものらしい
+  const [userInfo, setUserInfo] = useRecoilState(userState);
   const onClickSwitch = () => setUserInfo({ isAdmin: !userInfo.isAdmin });
 
   return (

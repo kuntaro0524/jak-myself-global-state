@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { SecondaryButton } from "../atoms/button/SecondaryButton";
-import { useContext } from "react";
-import { UserContext } from "../../providers/UserProvider";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../../store/userState";
 
 export const Top = () => {
   // ボタンを押したときにページ遷移をするときに使う関数
   const history = useHistory();
 
-  // コンテキストを利用してフラグをGlobalな情報として管理するように変更する
-  // UserProviderの中で定義したセット関数だけをわたしてあげる
-  const { setUserInfo } = useContext(UserContext);
+  // userStateで定義した変数に対して「セット関数だけを取り出してつかう」ときの記述
+  const setUserInfo = useSetRecoilState(userState);
 
   // 管理者のフラグはGlobalに管理する
   // 画面遷移はそれだけの機能で

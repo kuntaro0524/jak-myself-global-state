@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
 
 // UserProviderで囲まれた親コンポーネントにこれが含まれているとglobal stateが使えるのだが
 // それを使うために定義するのがこちら
-import React, { memo, useContext } from "react";
-import { UserContext } from "../../../providers/UserProvider";
+import React, { memo } from "react";
+import { userState } from "../../../store/userState";
 
 // ユーザのイメージと名前だけを使うということを想定してその組み合わせの部分だけを切り離すイメージのmolecule
 
@@ -13,10 +14,12 @@ export const UserIconWithName = memo((props) => {
 
   // componentの昨日としては名前とイメージを表示するだけなので受け取るpropsも限定しておいたほうがみんなにとってわかりやすい
   const { name, image } = props;
-  // 実際にGlobal stateの内容を受け取るところ
-  // どのcontextかを指定してあげる必要がある
-  // さらに変化するパラメタとしてUserProviderに設定したuserInfo（global管理されている数値）
-  const { userInfo } = useContext(UserContext);
+
+  // ここで recoil を利用した変数へのアクセスが行われる
+  // 値だけを参照したいときは useRecoilValue　とかく。
+  // 注意点としてはここで [] で変数と関数をいつもはうけている（useState とか）のだが、単独の情報として代入なので[]とか{}が不要ってこと
+  // もともと配列データなのでそりゃそうかって感じ
+  const userInfo = useRecoilValue(userState);
   console.log(userInfo);
 
   // 受け取った context から isAdminを取り出す
