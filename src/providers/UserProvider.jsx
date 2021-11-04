@@ -8,7 +8,8 @@ export const UserContext = createContext({});
 export const UserProvider = (props) => {
   const { children } = props;
   // どの関数からでもデータを参照して、変更できるようにvalueとして値と関数を渡してあげる
-  const [userInfo, setUserInfo] = useState(null);
+  // このまま利用するとこの情報が更新されるとそれをつかっているコンポーネントはすべて再レンダリングされる
+  const [userInfo, setUserInfo] = useState({ isAdmin: false });
 
   return (
     // valueで指定したものをグローバルなステートとして管理する

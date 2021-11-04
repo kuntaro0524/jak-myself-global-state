@@ -8,6 +8,9 @@ import { UserContext } from "../../../providers/UserProvider";
 // ユーザのイメージと名前だけを使うということを想定してその組み合わせの部分だけを切り離すイメージのmolecule
 
 export const UserIconWithName = (props) => {
+  // 再レンダリングの機能評価のためのログ
+  console.log("UserIconWithName");
+
   // componentの昨日としては名前とイメージを表示するだけなので受け取るpropsも限定しておいたほうがみんなにとってわかりやすい
   const { name, image } = props;
   // 実際にGlobal stateの内容を受け取るところ

@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../../providers/UserProvider";
+import { SecondaryButton } from "../atoms/button/SecondaryButton";
 import { SearchInput } from "../molecules/SearchInput";
 import { UserCard } from "../organisms/user/UserCard";
 
@@ -22,10 +25,15 @@ const users = [...Array(10).keys()].map((val) => {
 });
 
 export const Users = () => {
+  const { userInfo, setUserInfo } = useContext(UserContext);
+  const onClickSwitch = () => setUserInfo({ isAdmin: !userInfo.isAdmin });
+
   return (
     <SContainer>
       <h2> ユーザ一覧 </h2>
       <SearchInput />
+      {/* 管理者とそうでない人を切り替えるボタン→useContextの様子を見るために実装 */}
+      <SecondaryButton onClick={onClickSwitch}> 切り替えるよ </SecondaryButton>
       <SUserArea>
         {users.map((user) => (
           // UserCardにisAdminのフラグをわたしていく

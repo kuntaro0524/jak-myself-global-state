@@ -3,6 +3,8 @@ import { Card } from "../../atoms/card/Card";
 import { UserIconWithName } from "../../molecules/user/UserIconWithName";
 
 export const UserCard = (props) => {
+  console.log("UserCard");
+
   const { user } = props;
 
   return (
