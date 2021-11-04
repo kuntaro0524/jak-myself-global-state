@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 // UserProviderで囲まれた親コンポーネントにこれが含まれているとglobal stateが使えるのだが
 // それを使うために定義するのがこちら
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { UserContext } from "../../../providers/UserProvider";
 
 // ユーザのイメージと名前だけを使うということを想定してその組み合わせの部分だけを切り離すイメージのmolecule
 
-export const UserIconWithName = (props) => {
+export const UserIconWithName = memo((props) => {
   // 再レンダリングの機能評価のためのログ
   console.log("UserIconWithName");
 
@@ -29,7 +29,7 @@ export const UserIconWithName = (props) => {
       {isAdmin && <SEdit> 編集 </SEdit>}
     </SContainer>
   );
-};
+});
 
 // ユーザ名と画像を中央揃え
 const SContainer = styled.div`

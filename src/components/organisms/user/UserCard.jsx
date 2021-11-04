@@ -1,8 +1,9 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { Card } from "../../atoms/card/Card";
 import { UserIconWithName } from "../../molecules/user/UserIconWithName";
 
-export const UserCard = (props) => {
+export const UserCard = memo((props) => {
   console.log("UserCard");
 
   const { user } = props;
@@ -22,7 +23,7 @@ export const UserCard = (props) => {
       </SDl>
     </Card>
   );
-};
+});
 
 // テーブルにスタイルを適用する
 const SDl = styled.dl`

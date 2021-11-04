@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../../providers/UserProvider";
 import { SecondaryButton } from "../atoms/button/SecondaryButton";
@@ -24,7 +24,7 @@ const users = [...Array(10).keys()].map((val) => {
   };
 });
 
-export const Users = () => {
+export const Users = memo(() => {
   const { userInfo, setUserInfo } = useContext(UserContext);
   const onClickSwitch = () => setUserInfo({ isAdmin: !userInfo.isAdmin });
 
@@ -42,7 +42,7 @@ export const Users = () => {
       </SUserArea>
     </SContainer>
   );
-};
+});
 
 // 縦方向にコンポーネントを積んでいく、中心に合わせる
 const SContainer = styled.div`
